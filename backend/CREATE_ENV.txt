@@ -1,0 +1,24 @@
+Copy this content to create backend/.env file:
+
+# MongoDB Configuration
+MONGODB_URI=mongodb+srv://yogakumar221_db_user:Yogesh%401987@cluster0.fqqovex.mongodb.net/anonymeet?retryWrites=true&w=majority
+MONGODB_DB=anonymeet
+
+# Server Configuration
+PORT=3001
+
+# JWT Secret - Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+JWT_SECRET=please_generate_a_secure_secret_here
+
+# Allowed Origins (comma-separated)
+ALLOWED_ORIGINS=http://localhost:5173,https://annoymeet.vercel.app
+
+IMPORTANT NOTES:
+1. The @ in your password (Yogesh@1987) has been URL-encoded as %40
+2. Replace JWT_SECRET with a generated secret (see command above)
+3. Save this as .env (not .env.txt) in the backend/ directory
+
+
+
+
+

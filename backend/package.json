@@ -1,0 +1,25 @@
+{
+  "name": "chatroom-backend",
+  "version": "1.0.0",
+  "description": "Socket.IO backend for chatroom app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'No build needed for backend'"
+  },
+  "dependencies": {
+    "bad-words": "^3.0.4",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^4.18.2",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.20.0",
+    "socket.io": "^4.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
