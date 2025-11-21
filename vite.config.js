@@ -6,9 +6,16 @@ export default defineConfig({
   resolve: {
     extensions: ['.js', '.jsx', '.json']
   },
+  // Server config only for development
   server: {
-    host: '0.0.0.0',
+    host: true,
     port: 5173,
     strictPort: true
+  },
+  // Preview config for production preview
+  preview: {
+    host: true,
+    port: parseInt(process.env.PORT) || 4173,
+    strictPort: false
   }
 })

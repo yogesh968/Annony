@@ -1,0 +1,27 @@
+services:
+  # Backend Service
+  - type: web
+    name: anonymeet-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Note: PORT is automatically set by Render, no need to specify
+      # MONGODB_URI, JWT_SECRET, and ALLOWED_ORIGINS must be set manually in Render dashboard
+
+  # Frontend Service
+  - type: web
+    name: anonymeet-frontend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Note: PORT is automatically set by Render
+      # VITE_BACKEND_URL must be set manually to your backend service URL
+

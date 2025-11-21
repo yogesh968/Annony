@@ -16,9 +16,26 @@ const RoomMember = require('./models/RoomMember');
 const app = express();
 const server = http.createServer(app);
 
+// Get allowed origins from environment variable or use defaults
+const defaultOrigins = [
+  'http://localhost:5173',
+  'https://annoymeet.vercel.app',
+  'http://localhost:4173' // Vite preview port
+];
+
 const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(',').map((origin) => origin.trim())
-  : ['http://localhost:5173', 'https://annoymeet.vercel.app'];
+  ? process.env.ALLOWED_ORIGINS.split(',').map((origin) => origin.trim()).filter(Boolean)
+  : defaultOrigins;
+
+// Add Render frontend URL if it exists
+if (process.env.RENDER_EXTERNAL_URL) {
+  allowedOrigins.push(process.env.RENDER_EXTERNAL_URL);
+}
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
+console.log('🌐 Allowed CORS origins:', allowedOrigins);
 
 const io = socketIo(server, {
   cors: {
