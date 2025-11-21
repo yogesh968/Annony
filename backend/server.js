@@ -27,13 +27,11 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map((origin) => origin.trim()).filter(Boolean)
   : defaultOrigins;
 
-// Add Render frontend URL if it exists
-if (process.env.RENDER_EXTERNAL_URL) {
-  allowedOrigins.push(process.env.RENDER_EXTERNAL_URL);
-}
+// Add Render frontend URL if it exists (but not the backend URL itself)
 if (process.env.FRONTEND_URL) {
   allowedOrigins.push(process.env.FRONTEND_URL);
 }
+// RENDER_EXTERNAL_URL is the backend's own URL, so we don't add it to CORS
 
 console.log('🌐 Allowed CORS origins:', allowedOrigins);
 
@@ -52,6 +50,20 @@ app.use(
   })
 );
 app.use(express.json());
+
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Anonymeet Backend API',
+    status: 'running',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      rooms: '/api/rooms'
+    }
+  });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/rooms', roomRoutes);
