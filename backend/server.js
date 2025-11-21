@@ -20,6 +20,7 @@ const server = http.createServer(app);
 const defaultOrigins = [
   'http://localhost:5173',
   'https://annoymeet.vercel.app',
+  'https://annony-tau.vercel.app', // Current Vercel deployment
   'http://localhost:4173' // Vite preview port
 ];
 
